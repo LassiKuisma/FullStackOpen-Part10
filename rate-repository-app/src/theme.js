@@ -19,6 +19,10 @@ const theme = {
   },
   padding: {
     tabPadding: 10,
+    statsPadding: 20,
+  },
+  icon: {
+    size: 50,
   },
 };
 

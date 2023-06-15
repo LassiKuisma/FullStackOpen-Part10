@@ -1,9 +1,17 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+
+import Text from './Text';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   logo: {
-    width: 50,
-    height: 50,
+    width: theme.icon.size,
+    height: theme.icon.size,
+  },
+  cell: {
+    alignItems: 'center',
+    paddingLeft: theme.padding.statsPadding,
+    paddingRight: theme.padding.statsPadding,
   },
 });
 
@@ -37,9 +45,14 @@ const RepositoryStats = ({ item }) => {
 };
 
 const StatsCell = ({ title, value }) => {
+  const valueWithSuffix =
+    value >= 1000
+      ? (value / 1000).toFixed(1).toString() + 'k'
+      : value.toString();
+
   return (
-    <View>
-      <Text>{value}</Text>
+    <View style={styles.cell}>
+      <Text fontWeight="bold">{valueWithSuffix}</Text>
       <Text>{title}</Text>
     </View>
   );
