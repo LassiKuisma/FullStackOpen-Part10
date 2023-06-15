@@ -3,7 +3,7 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   text: {
-    color: theme.colors.textAppBar,
+    color: theme.colors.textLight,
     fontSize: theme.fontSizes.subheading,
     fontWeight: theme.fontWeights.bold,
   },

@@ -13,6 +13,17 @@ const styles = StyleSheet.create({
     paddingLeft: theme.padding.statsPadding,
     paddingRight: theme.padding.statsPadding,
   },
+  info: {
+    flexDirection: 'row',
+    padding: 10,
+    gap: 10,
+  },
+  language: {
+    color: theme.colors.textLight,
+    backgroundColor: theme.colors.primary,
+    borderRadius: 10,
+    padding: 10,
+  },
 });
 
 const RepositoryItem = (props) => {
@@ -20,15 +31,29 @@ const RepositoryItem = (props) => {
 
   return (
     <View>
+      <BasicInfo item={item} />
+      <RepositoryStats item={item} />
+    </View>
+  );
+};
+
+const BasicInfo = ({ item }) => {
+  return (
+    <View style={styles.info}>
       <Image
         style={styles.logo}
         source={item.ownerAvatarUrl}
         alt="user avatar"
       />
-      <Text>Full name: {item.fullName}</Text>
-      <Text>Description: {item.description}</Text>
-      <Text>Language: {item.language}</Text>
-      <RepositoryStats item={item} />
+      <View style={{ alignItems: 'flex-start' }}>
+        <Text fontWeight="bold" fontSize="subheading">
+          {item.fullName}
+        </Text>
+        <Text>{item.description}</Text>
+        <Text fontWeight="bold" style={styles.language}>
+          {item.language}
+        </Text>
+      </View>
     </View>
   );
 };
