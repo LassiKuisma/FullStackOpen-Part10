@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
   },
   cell: {
     alignItems: 'center',
-    paddingLeft: theme.padding.statsPadding,
-    paddingRight: theme.padding.statsPadding,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   info: {
     flexDirection: 'row',

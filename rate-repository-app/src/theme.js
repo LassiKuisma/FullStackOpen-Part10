@@ -17,10 +17,6 @@ const theme = {
     normal: '400',
     bold: '700',
   },
-  padding: {
-    tabPadding: 10,
-    statsPadding: 20,
-  },
   icon: {
     size: 50,
   },

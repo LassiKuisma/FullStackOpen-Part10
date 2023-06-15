@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     fontWeight: theme.fontWeights.bold,
   },
   container: {
-    padding: theme.padding.tabPadding,
+    padding: 10,
   },
 });
 
