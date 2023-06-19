@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
 
@@ -14,14 +15,8 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab
-        text={'Repositories'}
-        onPress={() => console.log('clicked on "repositories"')}
-      />
-      <AppBarTab
-        text={'Another tab'}
-        onPress={() => console.log('clicked on another tab')}
-      />
+      <AppBarTab text={'Repositories'} linkTo={'/'} />
+      <AppBarTab text={'Sign in'} linkTo={'/login'} />
     </View>
   );
 };
