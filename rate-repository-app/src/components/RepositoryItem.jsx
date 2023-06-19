@@ -5,7 +5,7 @@ import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.cellBackground,
+    backgroundColor: theme.colors.lightBackground,
   },
   logo: {
     width: theme.icon.size,
