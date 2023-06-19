@@ -1,8 +1,34 @@
-import { Pressable, View } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
+import theme from '../theme';
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.lightBackground,
+  },
+  textInput: {
+    placeholderTextColor: theme.colors.textSecondary,
+    height: 40,
+    margin: 12,
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+  },
+  loginButton: {
+    backgroundColor: theme.colors.primary,
+    height: 40,
+    margin: 12,
+    padding: 10,
+    borderRadius: 5,
+  },
+  loginButtonText: {
+    color: theme.colors.textLight,
+    textAlign: 'center',
+  },
+});
 
 const initialValues = {
   username: '',
@@ -11,11 +37,26 @@ const initialValues = {
 
 const SignInForm = ({ onSubmit }) => {
   return (
-    <View>
-      <FormikTextInput name="username" placeholder="Username" />
-      <FormikTextInput name="password" placeholder="Password" />
-      <Pressable onPress={onSubmit}>
-        <Text>Login</Text>
+    <View style={styles.container}>
+      <FormikTextInput
+        name="username"
+        placeholder="Username"
+        style={styles.textInput}
+      />
+      <FormikTextInput
+        name="password"
+        placeholder="Password"
+        secureTextEntry
+        style={styles.textInput}
+      />
+      <Pressable onPress={onSubmit} style={styles.loginButton}>
+        <Text
+          fontWeight="bold"
+          fontSize="subheading"
+          style={styles.loginButtonText}
+        >
+          Login
+        </Text>
       </Pressable>
     </View>
   );
