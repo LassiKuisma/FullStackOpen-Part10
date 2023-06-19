@@ -5,6 +5,8 @@ const theme = {
     textLight: '#ffffff',
     primary: '#0366d6',
     appBar: '#24292e',
+    background: '#e1e4e8',
+    cellBackground: '#ffffff'
   },
   fontSizes: {
     body: 14,

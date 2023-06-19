@@ -4,14 +4,19 @@ import Text from './Text';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.cellBackground,
+  },
   logo: {
     width: theme.icon.size,
     height: theme.icon.size,
+    borderRadius: 5,
   },
   cell: {
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
+    gap: 5,
   },
   info: {
     flexDirection: 'row',
@@ -21,8 +26,10 @@ const styles = StyleSheet.create({
   language: {
     color: theme.colors.textLight,
     backgroundColor: theme.colors.primary,
-    borderRadius: 10,
-    padding: 10,
+    borderRadius: 5,
+    padding: 5,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
@@ -30,7 +37,7 @@ const RepositoryItem = (props) => {
   const item = props.item;
 
   return (
-    <View>
+    <View style={styles.container}>
       <BasicInfo item={item} />
       <RepositoryStats item={item} />
     </View>
