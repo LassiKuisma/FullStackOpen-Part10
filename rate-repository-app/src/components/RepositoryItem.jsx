@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     width: theme.icon.size,
     height: theme.icon.size,
     borderRadius: 5,
+    marginRight: 10,
   },
   cell: {
     alignItems: 'center',
@@ -49,7 +50,7 @@ const BasicInfo = ({ item }) => {
     <View style={styles.info}>
       <Image
         style={styles.logo}
-        source={item.ownerAvatarUrl}
+        source={{ uri: item.ownerAvatarUrl }}
         alt="user avatar"
       />
       <View style={{ alignItems: 'flex-start' }}>
