@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
   errorText: {
     color: theme.colors.error,
     marginTop: 5,
-    marginLeft: 12,
+    marginLeft: theme.spacing.formMargin,
   },
   textInput: {
     placeholderTextColor: theme.colors.textSecondary,
     height: 40,
-    margin: 12,
+    margin: theme.spacing.formMargin,
     marginBottom: 5,
-    padding: 10,
+    padding: theme.spacing.formPadding,
     borderRadius: 5,
     borderWidth: 1,
   },

@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: theme.colors.primary,
     height: 40,
-    margin: 12,
-    padding: 10,
+    margin: theme.spacing.formMargin,
+    padding: theme.spacing.formPadding,
     borderRadius: 5,
   },
   loginButtonText: {

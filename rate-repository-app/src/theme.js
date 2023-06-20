@@ -23,6 +23,10 @@ const theme = {
   icon: {
     size: 50,
   },
+  spacing: {
+    formMargin: 12,
+    formPadding: 10,
+  }
 };
 
 export default theme;
