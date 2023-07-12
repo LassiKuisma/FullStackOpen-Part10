@@ -76,6 +76,10 @@ const SignIn = () => {
     }
   };
 
+  return <SignInContainer onSubmit={onSubmit} />;
+};
+
+export const SignInContainer = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={initialValues}
