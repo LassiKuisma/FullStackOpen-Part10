@@ -38,7 +38,7 @@ const RepositoryItem = (props) => {
   const item = props.item;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <BasicInfo item={item} />
       <RepositoryStats item={item} />
     </View>
