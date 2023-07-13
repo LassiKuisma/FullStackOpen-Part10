@@ -5,12 +5,11 @@ import { useQuery } from '@apollo/client';
 import { GET_REPOSITORY } from '../graphql/queries';
 import RepositoryItem from './RepositoryItem';
 
-import theme from '../theme';
 import ReviewItem from './ReviewItem';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.lightBackground,
+  header: {
+    paddingBottom: 10,
   },
   separator: {
     height: 10,
@@ -45,6 +44,7 @@ const SingleRepositoryView = () => {
       ListHeaderComponent={() => (
         <RepositoryItem item={repository} displayLink={true} />
       )}
+      ListHeaderComponentStyle={styles.header}
     />
   );
 };

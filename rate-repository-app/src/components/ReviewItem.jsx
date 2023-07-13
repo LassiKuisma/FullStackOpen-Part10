@@ -15,10 +15,19 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.primary,
     borderWidth: theme.rating.border,
     justifyContent: 'center',
+    margin: 10,
   },
   ratingText: {
     textAlign: 'center',
     textAlignVertical: 'center',
+  },
+  infoContainer: {
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  textContainer: {
+    width: '90%',
+    marginBottom: 10,
   },
 });
 
@@ -52,9 +61,13 @@ const ReviewContent = ({ content }) => {
   const { name, date, text } = content;
   return (
     <View>
-      <Text fontWeight="bold">{name}</Text>
-      <Text>{date}</Text>
-      <Text>{text}</Text>
+      <View style={styles.infoContainer}>
+        <Text fontWeight="bold">{name}</Text>
+        <Text>{date}</Text>
+      </View>
+      <View style={styles.textContainer}>
+        <Text>{text}</Text>
+      </View>
     </View>
   );
 };
