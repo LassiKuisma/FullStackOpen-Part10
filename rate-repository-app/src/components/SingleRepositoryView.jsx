@@ -18,7 +18,7 @@ const SingleRepositoryView = () => {
     return null;
   }
 
-  return <RepositoryItem item={repository} />;
+  return <RepositoryItem item={repository} displayLink={true} />;
 };
 
 export default SingleRepositoryView;

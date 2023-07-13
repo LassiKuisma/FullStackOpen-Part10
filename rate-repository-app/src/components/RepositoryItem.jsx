@@ -1,4 +1,6 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Button, Image, StyleSheet, View } from 'react-native';
+
+import * as Linking from 'expo-linking';
 
 import Text from './Text';
 import theme from '../theme';
@@ -37,10 +39,13 @@ const styles = StyleSheet.create({
 const RepositoryItem = (props) => {
   const item = props.item;
 
+  const displayLink = props.displayLink;
+
   return (
     <View style={styles.container} testID="repositoryItem">
       <BasicInfo item={item} />
       <RepositoryStats item={item} />
+      {displayLink && <LinkToGithub url={item.url} />}
     </View>
   );
 };
@@ -87,6 +92,18 @@ const StatsCell = ({ title, value }) => {
     <View style={styles.cell}>
       <Text fontWeight="bold">{valueWithSuffix}</Text>
       <Text>{title}</Text>
+    </View>
+  );
+};
+
+const LinkToGithub = ({ url }) => {
+  const onPress = () => {
+    Linking.openURL(url);
+  };
+
+  return (
+    <View>
+      <Button onPress={onPress} title="Open in GitHub"></Button>
     </View>
   );
 };
