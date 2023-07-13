@@ -33,6 +33,10 @@ const theme = {
     formMargin: 12,
     formPadding: 10,
   },
+  rating: {
+    size: 40,
+    border: 3
+  },
 };
 
 export default theme;
