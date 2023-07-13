@@ -1,4 +1,4 @@
-import { Button, Image, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import * as Linking from 'expo-linking';
 
@@ -33,6 +33,17 @@ const styles = StyleSheet.create({
     padding: 5,
     marginTop: 10,
     marginBottom: 10,
+  },
+  urlContainer: {
+    margin: 10,
+    maxWidth: 400,
+  },
+  urlButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.primary,
+    borderRadius: 5,
+    padding: 15,
   },
 });
 
@@ -102,8 +113,12 @@ const LinkToGithub = ({ url }) => {
   };
 
   return (
-    <View>
-      <Button onPress={onPress} title="Open in GitHub"></Button>
+    <View style={styles.urlContainer}>
+      <Pressable onPress={onPress} style={styles.urlButton}>
+        <Text fontWeight="bold" fontSize="subheading" color="light">
+          Open in GitHub
+        </Text>
+      </Pressable>
     </View>
   );
 };
