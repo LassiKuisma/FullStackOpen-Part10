@@ -2,10 +2,13 @@ import { View, StyleSheet, Pressable } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import useReview from '../hooks/useReview';
+
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 
 import theme from '../theme';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,9 +69,27 @@ const ReviewForm = ({ onSubmit }) => {
 };
 
 const Review = () => {
-  const onSubmit = (values) => {
-    // TODO:
-    console.log('submitting values:', values);
+  const [createReview] = useReview();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    const { repositoryOwner, repositoryName, rating, reviewText } = values;
+
+    try {
+      const ratingAsNumber = Number(rating);
+
+      const created = await createReview({
+        repositoryOwner,
+        repositoryName,
+        rating: ratingAsNumber,
+        reviewText,
+      });
+
+      const id = created.data.createReview.repositoryId;
+      navigate(`/repository/${id}`);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (

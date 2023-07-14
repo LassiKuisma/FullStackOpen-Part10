@@ -13,3 +13,16 @@ export const REPOSITORY_INFO = gql`
     ratingAverage
   }
 `;
+
+export const REVIEW = gql`
+  fragment ReviewFields on Review {
+    id
+    text
+    rating
+    createdAt
+    user {
+      id
+      username
+    }
+  }
+`;
