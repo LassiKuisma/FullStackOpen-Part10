@@ -1,4 +1,5 @@
 import { View, StyleSheet, Pressable } from 'react-native';
+import { useNavigate } from 'react-router-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -6,6 +7,8 @@ import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 
 import theme from '../theme';
+import useCreateUser from '../hooks/useCreateUser';
+import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -59,8 +62,21 @@ const CreateAccountForm = ({ onSubmit }) => {
 };
 
 const CreateAccount = () => {
+  const [createUser] = useCreateUser();
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+
   const onSubmit = async (values) => {
-    console.log('Create account:', values);
+    const { username, password } = values;
+
+    try {
+      await createUser({ username, password });
+      await signIn({ username, password });
+
+      navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
