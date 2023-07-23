@@ -34,6 +34,7 @@ const AppBar = () => {
         {displayLogout && (
           <>
             <AppBarTab text="Create a review" linkTo="/review" />
+            <AppBarTab text="My reviews" linkTo="/myreviews" />
             <AppBarTab type="logout" text="Sign out" linkTo="/" />
           </>
         )}

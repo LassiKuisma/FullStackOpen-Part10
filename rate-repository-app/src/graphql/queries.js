@@ -23,10 +23,18 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const CURRENT_USER = gql`
-  query CurrentUser {
+  ${REVIEW}
+  query CurrentUser($includeReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            ...ReviewFields
+          }
+        }
+      }
     }
   }
 `;

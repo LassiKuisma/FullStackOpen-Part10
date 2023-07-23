@@ -34,18 +34,19 @@ const styles = StyleSheet.create({
 
 const DATE_FORMAT = 'dd.MM.yyyy';
 
-const ReviewItem = ({ review }) => {
-  const name = review.user.username;
+const ReviewItem = ({ review, repositoryNameAsHeader }) => {
+  const userName = review.user.username;
   const date = review.createdAt;
   const rating = review.rating;
   const text = review.text;
+  const repositoryName = review.repository.fullName;
 
-  const content = { name, date, text };
+  const header = repositoryNameAsHeader ? repositoryName : userName;
 
   return (
     <View style={styles.container}>
       <Rating rating={rating} />
-      <ReviewContent content={content} />
+      <ReviewContent header={header} date={date} text={text} />
     </View>
   );
 };
@@ -60,16 +61,14 @@ const Rating = ({ rating }) => {
   );
 };
 
-const ReviewContent = ({ content }) => {
-  const { name, date, text } = content;
-
+const ReviewContent = ({ header, date, text }) => {
   const dateObject = new Date(date);
   const dateHumanReadable = format(dateObject, DATE_FORMAT);
 
   return (
     <View>
       <View style={styles.infoContainer}>
-        <Text fontWeight="bold">{name}</Text>
+        <Text fontWeight="bold">{header}</Text>
         <Text>{dateHumanReadable}</Text>
       </View>
       <View style={styles.textContainer}>
