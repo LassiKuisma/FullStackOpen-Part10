@@ -1,8 +1,8 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { useQuery } from '@apollo/client';
 import Constants from 'expo-constants';
 
-import { CURRENT_USER } from '../graphql/queries';
+import useCurrentUser from '../hooks/useCurrentUser';
+
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
 
@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { loading, data } = useQuery(CURRENT_USER);
+  const { loading, user } = useCurrentUser();
 
-  const loggedIn = !!data?.me;
+  const loggedIn = !!user;
   const displayLogin = !loading && !loggedIn;
   const displayLogout = !loading && loggedIn;
 
