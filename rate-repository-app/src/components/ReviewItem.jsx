@@ -1,10 +1,12 @@
 import { View, StyleSheet, Alert } from 'react-native';
 import { format } from 'date-fns';
 
+import { useNavigate } from 'react-router-native';
+import useDeleteReview from '../hooks/useDeleteReview';
+
 import theme from '../theme';
 import Text from './Text';
 import Button from './Button';
-import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
 
 const DATE_FORMAT = 'dd.MM.yyyy';
 
-const ReviewItem = ({ review, userReviewView }) => {
+const ReviewItem = ({ review, userReviewView, refetchReviews }) => {
   const userName = review.user.username;
   const date = review.createdAt;
   const rating = review.rating;
@@ -63,6 +65,7 @@ const ReviewItem = ({ review, userReviewView }) => {
           repositoryName={repositoryName}
           reviewId={review.id}
           repositoryId={review.repository.id}
+          refetchReviews={refetchReviews}
         />
       )}
     </View>
@@ -96,14 +99,20 @@ const ReviewContent = ({ header, date, text }) => {
   );
 };
 
-const ReviewActions = ({ repositoryName, reviewId, repositoryId }) => {
+const ReviewActions = ({
+  repositoryName,
+  reviewId,
+  repositoryId,
+  refetchReviews,
+}) => {
+  const [deleteReview] = useDeleteReview();
   const navigate = useNavigate();
 
   const viewRepository = () => {
     navigate(`/repository/${repositoryId}`);
   };
 
-  const deleteReview = () => {
+  const onDeletePress = () => {
     const message = `Delete review of repository ${repositoryName}?`;
     Alert.alert('Delete review', message, [
       {
@@ -112,8 +121,13 @@ const ReviewActions = ({ repositoryName, reviewId, repositoryId }) => {
       },
       {
         text: 'Delete',
-        onPress: () => {
-          console.log(`deleting review ${reviewId}`);
+        onPress: async () => {
+          try {
+            await deleteReview({ reviewId });
+            refetchReviews();
+          } catch (e) {
+            console.log(e);
+          }
         },
       },
     ]);
@@ -127,7 +141,7 @@ const ReviewActions = ({ repositoryName, reviewId, repositoryId }) => {
         style={styles.reviewButton}
       />
       <Button
-        onSubmit={deleteReview}
+        onSubmit={onDeletePress}
         text={'Delete review'}
         style={styles.reviewButton}
         color="red"
