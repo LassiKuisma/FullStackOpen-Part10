@@ -7,53 +7,54 @@ import Text from './Text';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.lightBackground,
-    flexDirection: 'row',
+    padding: 10,
   },
-  rating: {
+  score: {
     width: theme.rating.size,
     height: theme.rating.size,
     borderRadius: theme.rating.size / 2,
     borderColor: theme.colors.primary,
     borderWidth: theme.rating.border,
     justifyContent: 'center',
-    margin: 10,
   },
   ratingText: {
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-  infoContainer: {
-    marginTop: 10,
-    marginBottom: 5,
+  contentContainer: {
+    marginHorizontal: 10,
   },
-  textContainer: {
+  reviewText: {
     width: '90%',
-    marginBottom: 10,
+    marginVertical: 5,
   },
 });
 
 const DATE_FORMAT = 'dd.MM.yyyy';
 
-const ReviewItem = ({ review, repositoryNameAsHeader }) => {
+const ReviewItem = ({ review, userReviewView }) => {
   const userName = review.user.username;
   const date = review.createdAt;
   const rating = review.rating;
   const text = review.text;
   const repositoryName = review.repository.fullName;
 
-  const header = repositoryNameAsHeader ? repositoryName : userName;
+  const header = userReviewView ? repositoryName : userName;
 
   return (
     <View style={styles.container}>
-      <Rating rating={rating} />
-      <ReviewContent header={header} date={date} text={text} />
+      <View style={{ flexDirection: 'row' }}>
+        <Score rating={rating} />
+        <ReviewContent header={header} date={date} text={text} />
+      </View>
+      {userReviewView && <ReviewActions />}
     </View>
   );
 };
 
-const Rating = ({ rating }) => {
+const Score = ({ rating }) => {
   return (
-    <View style={styles.rating}>
+    <View style={styles.score}>
       <Text color="primary" fontWeight="bold" style={styles.ratingText}>
         {rating}
       </Text>
@@ -66,14 +67,23 @@ const ReviewContent = ({ header, date, text }) => {
   const dateHumanReadable = format(dateObject, DATE_FORMAT);
 
   return (
-    <View>
-      <View style={styles.infoContainer}>
+    <View style={styles.contentContainer}>
+      <View>
         <Text fontWeight="bold">{header}</Text>
         <Text>{dateHumanReadable}</Text>
       </View>
-      <View style={styles.textContainer}>
+      <View style={styles.reviewText}>
         <Text>{text}</Text>
       </View>
+    </View>
+  );
+};
+
+const ReviewActions = () => {
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <Text>View repository</Text>
+      <Text>Delete review</Text>
     </View>
   );
 };

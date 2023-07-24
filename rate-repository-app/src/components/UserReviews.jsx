@@ -24,13 +24,12 @@ const UserReviews = () => {
   }
 
   const reviews = user.reviews.edges.map((e) => e.node);
-  console.log(reviews);
 
   return (
     <FlatList
       data={reviews}
       renderItem={({ item }) => (
-        <ReviewItem review={item} repositoryNameAsHeader={true} />
+        <ReviewItem review={item} userReviewView={true} />
       )}
       keyExtractor={({ id }) => id}
       ItemSeparatorComponent={ItemSeparator}
