@@ -1,10 +1,10 @@
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import useReview from '../hooks/useReview';
 
-import Text from './Text';
+import Button from './Button';
 import FormikTextInput from './FormikTextInput';
 
 import theme from '../theme';
@@ -13,17 +13,6 @@ import { useNavigate } from 'react-router-native';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.lightBackground,
-  },
-  submitButton: {
-    backgroundColor: theme.colors.primary,
-    height: 40,
-    margin: theme.spacing.formMargin,
-    padding: theme.spacing.formPadding,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: theme.colors.textLight,
-    textAlign: 'center',
   },
 });
 
@@ -59,11 +48,7 @@ const ReviewForm = ({ onSubmit }) => {
         placeholder="Review"
         multiline={true}
       />
-      <Pressable onPress={onSubmit} style={styles.submitButton}>
-        <Text fontWeight="bold" fontSize="subheading" style={styles.buttonText}>
-          Create a review
-        </Text>
-      </Pressable>
+      <Button onSubmit={onSubmit} text={'Create a review'} />
     </View>
   );
 };
