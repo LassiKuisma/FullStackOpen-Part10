@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.lightBackground,
   },
+  buttonSpacing: {
+    margin: theme.spacing.formMargin,
+  },
 });
 
 const initialValues = {
@@ -48,7 +51,11 @@ const ReviewForm = ({ onSubmit }) => {
         placeholder="Review"
         multiline={true}
       />
-      <Button onSubmit={onSubmit} text={'Create a review'} />
+      <Button
+        onSubmit={onSubmit}
+        text={'Create a review'}
+        style={styles.buttonSpacing}
+      />
     </View>
   );
 };

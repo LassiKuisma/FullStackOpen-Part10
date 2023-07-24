@@ -5,25 +5,33 @@ import Text from './Text';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
-  submitButton: {
+  buttonDefault: {
     backgroundColor: theme.colors.primary,
-    height: 40,
-    margin: theme.spacing.formMargin,
-    padding: theme.spacing.formPadding,
     borderRadius: 5,
+  },
+  buttonRed: {
+    backgroundColor: theme.colors.error,
   },
   buttonText: {
     color: theme.colors.textLight,
     textAlign: 'center',
+    textAlignVertical: 'center',
+    padding: 10,
+    fontWeight: theme.fontWeights.bold,
+    fontSize: theme.fontSizes.subheading,
   },
 });
 
-const Button = ({ onSubmit, text }) => {
+const Button = ({ onSubmit, text, style, color }) => {
+  const buttonStyle = [
+    styles.buttonDefault,
+    color === 'red' && styles.buttonRed,
+    style,
+  ];
+
   return (
-    <Pressable onPress={onSubmit} style={styles.submitButton}>
-      <Text fontWeight="bold" fontSize="subheading" style={styles.buttonText}>
-        {text}
-      </Text>
+    <Pressable onPress={onSubmit} style={buttonStyle}>
+      <Text style={styles.buttonText}>{text}</Text>
     </Pressable>
   );
 };

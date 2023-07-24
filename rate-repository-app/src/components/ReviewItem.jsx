@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 
 import theme from '../theme';
 import Text from './Text';
+import Button from './Button';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,8 +26,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   reviewText: {
-    width: '90%',
     marginVertical: 5,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  reviewButton: {
+    // could not figure out how to get flexcontainer's gap property to work
+    // in react native (might not be implemented), so this will do the trick
+    marginRight: 10,
+    padding: 5,
   },
 });
 
@@ -80,10 +90,27 @@ const ReviewContent = ({ header, date, text }) => {
 };
 
 const ReviewActions = () => {
+  const viewRepository = () => {
+    console.log('viewing repository');
+  };
+
+  const deleteReview = () => {
+    console.log('deleting review');
+  };
+
   return (
-    <View style={{ flexDirection: 'row' }}>
-      <Text>View repository</Text>
-      <Text>Delete review</Text>
+    <View style={styles.buttonContainer}>
+      <Button
+        onSubmit={viewRepository}
+        text={'View repository'}
+        style={styles.reviewButton}
+      />
+      <Button
+        onSubmit={deleteReview}
+        text={'Delete review'}
+        style={styles.reviewButton}
+        color="red"
+      />
     </View>
   );
 };
