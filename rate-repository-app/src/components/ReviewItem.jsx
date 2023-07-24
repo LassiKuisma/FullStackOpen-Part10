@@ -1,9 +1,10 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { format } from 'date-fns';
 
 import theme from '../theme';
 import Text from './Text';
 import Button from './Button';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -57,7 +58,13 @@ const ReviewItem = ({ review, userReviewView }) => {
         <Score rating={rating} />
         <ReviewContent header={header} date={date} text={text} />
       </View>
-      {userReviewView && <ReviewActions />}
+      {userReviewView && (
+        <ReviewActions
+          repositoryName={repositoryName}
+          reviewId={review.id}
+          repositoryId={review.repository.id}
+        />
+      )}
     </View>
   );
 };
@@ -89,13 +96,27 @@ const ReviewContent = ({ header, date, text }) => {
   );
 };
 
-const ReviewActions = () => {
+const ReviewActions = ({ repositoryName, reviewId, repositoryId }) => {
+  const navigate = useNavigate();
+
   const viewRepository = () => {
-    console.log('viewing repository');
+    navigate(`/repository/${repositoryId}`);
   };
 
   const deleteReview = () => {
-    console.log('deleting review');
+    const message = `Delete review of repository ${repositoryName}?`;
+    Alert.alert('Delete review', message, [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          console.log(`deleting review ${reviewId}`);
+        },
+      },
+    ]);
   };
 
   return (
