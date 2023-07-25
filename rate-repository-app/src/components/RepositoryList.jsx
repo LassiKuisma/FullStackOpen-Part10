@@ -5,9 +5,8 @@ import useRepositories from '../hooks/useRepositories';
 import { useNavigate } from 'react-router-native';
 
 import { useDebounce } from 'use-debounce';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import theme from '../theme';
-import Text from './Text';
 
 const styles = StyleSheet.create({
   separator: {
@@ -130,7 +129,7 @@ const RepositoryList = () => {
     first: 8,
     ...orderingTypes[ordering],
   };
-  const { repositories, loading, fetchMore } = useRepositories(args);
+  const { repositories, fetchMore } = useRepositories(args);
   const navigate = useNavigate();
 
   const onPress = (id) => {
@@ -140,10 +139,6 @@ const RepositoryList = () => {
   const onEndReach = () => {
     fetchMore();
   };
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
 
   return (
     <RepositoryListContainer
