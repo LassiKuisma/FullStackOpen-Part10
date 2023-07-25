@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-native';
 import { useDebounce } from 'use-debounce';
 import { useState } from 'react';
 import theme from '../theme';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   separator: {
@@ -90,6 +91,7 @@ export const RepositoryListContainer = ({
   setOrdering,
   keyword,
   setKeyword,
+  onEndReach,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -112,6 +114,8 @@ export const RepositoryListContainer = ({
           <RepositoryItem item={item} />
         </Pressable>
       )}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -123,14 +127,23 @@ const RepositoryList = () => {
 
   const args = {
     keyword: debounced,
+    first: 8,
     ...orderingTypes[ordering],
   };
-  const { repositories } = useRepositories(args);
+  const { repositories, loading, fetchMore } = useRepositories(args);
   const navigate = useNavigate();
 
   const onPress = (id) => {
     navigate(`/repository/${id}`);
   };
+
+  const onEndReach = () => {
+    fetchMore();
+  };
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <RepositoryListContainer
@@ -140,6 +153,7 @@ const RepositoryList = () => {
       setOrdering={setOrdering}
       keyword={keyword}
       setKeyword={setKeyword}
+      onEndReach={onEndReach}
     />
   );
 };
