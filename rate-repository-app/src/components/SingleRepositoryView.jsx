@@ -1,11 +1,11 @@
 import { FlatList, View, StyleSheet } from 'react-native';
 
+import useRepositoryDetails from '../hooks/useRepositoryDetails';
 import { useParams } from 'react-router-native';
-import { useQuery } from '@apollo/client';
-import { GET_REPOSITORY } from '../graphql/queries';
-import RepositoryItem from './RepositoryItem';
 
+import RepositoryItem from './RepositoryItem';
 import ReviewItem from './ReviewItem';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   header: {
@@ -20,18 +20,22 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const SingleRepositoryView = () => {
   const { repositoryId } = useParams();
-  const { data } = useQuery(GET_REPOSITORY, {
-    fetchPolicy: 'cache-and-network',
-    variables: {
-      id: repositoryId,
-    },
+  const { repository, loading, fetchMore } = useRepositoryDetails({
+    id: repositoryId,
+    first: 5,
   });
 
-  const repository = data?.repository;
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
   if (!repository) {
     return null;
   }
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   const reviews = repository.reviews.edges.map((n) => n.node);
 
@@ -45,6 +49,8 @@ const SingleRepositoryView = () => {
         <RepositoryItem item={repository} displayLink={true} />
       )}
       ListHeaderComponentStyle={styles.header}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
